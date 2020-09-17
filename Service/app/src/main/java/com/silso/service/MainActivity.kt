@@ -9,11 +9,10 @@ import android.os.Bundle
 import android.os.IBinder
 import android.util.Log
 import android.widget.Toast
-import com.silso.service.start
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
-    private lateinit var bindingService: bind
+    private lateinit var bindingService: BindServiceClass
     private var bound: Boolean = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -21,7 +20,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         start.setOnClickListener {
-            startService(Intent(this, com.silso.service.start::class.java))
+            startService(Intent(this, com.silso.service.StartServiceClass::class.java))
         }
 
         // 버튼이 눌렀을 때 서비스와 상호작용하도록 리스너 등록
@@ -36,7 +35,7 @@ class MainActivity : AppCompatActivity() {
     private val serviceConnection = object : ServiceConnection {
         // 서비스와 연결되었을 때
         override fun onServiceConnected(className: ComponentName, service: IBinder) {
-            val binder = service as bind.LocalBinder
+            val binder = service as BindServiceClass.LocalBinder
             bindingService = binder.getService()
             bound = true
             Log.d("bind", "true")

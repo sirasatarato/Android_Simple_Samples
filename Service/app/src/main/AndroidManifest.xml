@@ -10,11 +10,11 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <service
-            android:name=".bind"
+            android:name=".BindServiceClass"
             android:enabled="true"
             android:exported="true"></service>
         <service
-            android:name=".start"
+            android:name=".StartServiceClass"
             android:enabled="true"
             android:exported="true" />
 
