@@ -16,18 +16,16 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         Realm.init(this)
-        // 현재 스레드에서 Realm의 인스턴스 가져오기
-        realm = Realm.getDefaultInstance()
-        result.text = realm.where<model>(model::class.java).findFirst()?.str ?: "Help Me..."
+        realm = Realm.getDefaultInstance()  // 현재 스레드에서 Realm의 인스턴스 가져오기
+        result.text = realm.where<model>(model::class.java).findFirst()?.str ?: "None"
     }
 
     fun onClick(view: View){
         realm.beginTransaction()
 
-        val mod: model = realm.createObject(model::class.java)//데이터베이스에 저장할 객체 생성
-        mod.apply {
-            this.str = input.text.toString()
-        }
+        //데이터베이스에 저장할 객체 생성
+        val mod: model = realm.createObject(model::class.java)
+        mod.str = input.text.toString()
 
         realm.commitTransaction()
 
