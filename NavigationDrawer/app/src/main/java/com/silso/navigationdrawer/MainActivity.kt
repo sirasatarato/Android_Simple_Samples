@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.MenuItem
 import android.view.View
+import android.widget.Toast
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
@@ -11,14 +12,13 @@ import com.google.android.material.navigation.NavigationView
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
         setSupportActionBar(toolbar)
-        val toggle = ActionBarDrawerToggle(
-            this, drawer_layout, toolbar, 0, 0
-        )
+
+        val toggle = ActionBarDrawerToggle(this, drawer_layout, toolbar, 0, 0)
         drawer_layout.addDrawerListener(toggle)
         toggle.syncState()
 
@@ -28,8 +28,12 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         when(item.itemId){
-            R.id.navigation_item_1 -> {}
-            R.id.navigation_item_2 -> {}
+            R.id.navigation_item_1 -> {
+                Toast.makeText(this, "first item clicked!", Toast.LENGTH_SHORT).show()
+            }
+            R.id.navigation_item_2 -> {
+                Toast.makeText(this, "second item clicked!", Toast.LENGTH_SHORT).show()
+            }
         }
 
         drawer_layout.closeDrawer(GravityCompat.START)
