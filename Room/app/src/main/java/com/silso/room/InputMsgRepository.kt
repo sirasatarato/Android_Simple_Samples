@@ -7,6 +7,7 @@ import kotlinx.coroutines.withContext
 
 class InputMsgRepository private constructor(private val inputMsgDao: InputMsgDao) {
     fun getAllMsgs() = inputMsgDao.getAll()
+
     suspend fun insert(inputMsg: InputMsg) {
         withContext(Dispatchers.IO) {
             inputMsgDao.insertMsg(inputMsg)

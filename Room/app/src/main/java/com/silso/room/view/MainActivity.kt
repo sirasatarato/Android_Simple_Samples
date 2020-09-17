@@ -24,17 +24,14 @@ class MainActivity : AppCompatActivity() {
     private fun subscribeUi() {
         /**
          * 이 과정은 DI(dependency injection)으로 대체가 가능
-         * ok
          */
         val dao = AppDatabase.getInstance(this).inputMsgDao()
-        val repository =
-            InputMsgRepository.getInstance(dao)
+        val repository = InputMsgRepository.getInstance(dao)
         val factory = MailViewModelFactory(repository)
         val viewModel = ViewModelProviders.of(this, factory).get(MainViewModel::class.java)
 
         viewModel.inputMsgs.observe(this, Observer {
-            if (it == null || it.isEmpty())
-                return@Observer
+            if (it == null || it.isEmpty()) return@Observer
 
             val sb = StringBuffer()
             for (data in it) {
@@ -46,8 +43,7 @@ class MainActivity : AppCompatActivity() {
 
         btn_input.setOnClickListener {
             val input = et_input.text.toString()
-            if (input.isEmpty())
-                return@setOnClickListener
+            if (input.isEmpty()) return@setOnClickListener
 
             et_input.setText("")
             viewModel.insertMsg(InputMsg(msg = input))
