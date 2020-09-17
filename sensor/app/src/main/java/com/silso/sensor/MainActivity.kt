@@ -13,10 +13,10 @@ import android.util.Log
 import android.view.WindowManager
 
 class MainActivity : AppCompatActivity(), SensorEventListener {
-    private val sensorManager by lazy{
+    private lateinit var tiltView: TiltView
+    private val sensorManager by lazy {
         getSystemService(Context.SENSOR_SERVICE) as SensorManager
     }
-    private lateinit var tiltView: TiltView
 
     @SuppressLint("SourceLockedOrientationActivity")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -30,20 +30,27 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
 
     override fun onResume() {
         super.onResume()
-        sensorManager.registerListener(this,
-                sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER),
-                SensorManager.SENSOR_DELAY_NORMAL)
+
+        sensorManager.registerListener(
+            this,
+            sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER),
+            SensorManager.SENSOR_DELAY_NORMAL
+        )
     }
 
     override fun onPause() {
         super.onPause()
+
         sensorManager.unregisterListener(this)
     }
 
     override fun onAccuracyChanged(p0: Sensor?, p1: Int) {}
     override fun onSensorChanged(p0: SensorEvent?) {
         p0?.let {
-            Log.d("MainActivity", "onSensorChanged: x : ${p0.values[0]}, y : ${p0.values[1]}, z : ${p0.values[2]}")
+            Log.d(
+                "MainActivity",
+                "onSensorChanged: x : ${p0.values[0]}, y : ${p0.values[1]}, z : ${p0.values[2]}"
+            )
         }
 
         if (p0 != null) {
