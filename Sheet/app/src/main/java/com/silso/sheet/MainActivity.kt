@@ -7,7 +7,6 @@ import com.google.android.material.bottomsheet.BottomSheetBehavior
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.bottom_sheet.*
 
-
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -27,22 +26,14 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
-
         sheetBehavior.addBottomSheetCallback(object : BottomSheetBehavior.BottomSheetCallback() {
             override fun onSlide(bottomSheet: View, slideOffset: Float) {}
-
             override fun onStateChanged(bottomSheet: View, newState: Int) {
                 when (newState) {
-                    BottomSheetBehavior.STATE_HIDDEN -> {
-                    }
-                    BottomSheetBehavior.STATE_EXPANDED -> {
-                        setBtnCloseSheet()
-                    }
-                    BottomSheetBehavior.STATE_HALF_EXPANDED -> {
-                    }
-                    BottomSheetBehavior.STATE_COLLAPSED -> {
-                        setBtnExpandSheet()
-                    }
+                    BottomSheetBehavior.STATE_EXPANDED -> { setBtnCloseSheet() }
+                    BottomSheetBehavior.STATE_COLLAPSED -> { setBtnExpandSheet() }
+                    BottomSheetBehavior.STATE_HALF_EXPANDED -> { }
+                    BottomSheetBehavior.STATE_HIDDEN -> { }
                     BottomSheetBehavior.STATE_DRAGGING -> { }
                     BottomSheetBehavior.STATE_SETTLING -> { }
                 }
