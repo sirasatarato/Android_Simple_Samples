@@ -18,14 +18,14 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        viewModel = ViewModelProviders.of(this, Factory(Reposistory.getInstance(AppDatabase.getInstance(this)?.dao()))).get(BasicViewModel::class.java)
-        db = DataBindingUtil.setContentView(this,
-            R.layout.activity_main
-        )
-        db.apply {
-            vm = viewModel
-            lifecycleOwner = this@MainActivity
-        }
+
+        viewModel = ViewModelProviders.of(
+            this, Factory(Reposistory.getInstance(AppDatabase.getInstance(this)?.dao()))
+        ).get(BasicViewModel::class.java)
+
+        db = DataBindingUtil.setContentView(this, R.layout.activity_main)
+        db.vm = viewModel
+        db.lifecycleOwner = this@MainActivity
 
         subscribeUi()
     }
@@ -34,11 +34,9 @@ class MainActivity : AppCompatActivity() {
         viewModel.inputMsgs?.observe(this, Observer {
             if (it == null || it.isEmpty()) return@Observer
 
-            var a = ""
-            for(data in it)
-                a += data.str
-
-            db.textView.text = a
+            var addStr = ""
+            for (data in it) addStr += data.str
+            db.textView.text = addStr
         })
 
         db.button.setOnClickListener {

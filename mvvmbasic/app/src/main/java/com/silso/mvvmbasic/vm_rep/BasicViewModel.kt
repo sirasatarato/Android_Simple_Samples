@@ -17,8 +17,7 @@ class BasicViewModel(private val reposistory: Reposistory): ViewModel(){
     private val viewModelScope = CoroutineScope(Main + viewModelJob)
 
     fun insertMsg() {
-        if (str.get() ==  null || (str.get()?:"").isEmpty())
-            return
+        if (str.get() ==  null || (str.get()?:"").isEmpty()) return
 
         val a = str.get()!!
         viewModelScope.launch {

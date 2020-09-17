@@ -7,6 +7,7 @@ import kotlinx.coroutines.withContext
 
 class Reposistory(private val inputMsgDao: Dao?) {
     fun getAllMsgs() = inputMsgDao?.getAll()
+
     suspend fun insert(inputMsg: Entity) {
         withContext(Dispatchers.IO) {
             inputMsgDao?.insert(inputMsg)
