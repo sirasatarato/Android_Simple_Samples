@@ -1,0 +1,3 @@
+include ':comy'
+include ':app'
+rootProject.name = "Firs"
